@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using LemApperson_3DGame.Manager;
 using UnityEngine;
 
 namespace LemApperson_3DGame.Manager
@@ -12,7 +9,7 @@ namespace LemApperson_3DGame.Manager
         [SerializeField] private AudioSource _sfxAudioSource;
         [SerializeField] private AudioClip[] _sounds;
         
-        // 0 - Ambient      1 -             2 - 
+        // 0 - Ambient      1 - Gun Shot    2 - 
         // 3 -              4 -             5 - 
         
         private void Start() {

@@ -16,7 +16,7 @@ namespace LemApperson_3DGame.Animations
             // Call a method in that script to alert it that the state has been entered
             if (someOtherScript != null)
             {
-                someOtherScript.OnAnimationStateEntered(stateInfo.length);
+                someOtherScript.OnAnimationStateEntered(stateInfo.shortNameHash);
             }
         }
 

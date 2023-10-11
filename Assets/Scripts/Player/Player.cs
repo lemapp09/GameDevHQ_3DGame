@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +11,7 @@ namespace LemApperson_3DGame.Player
         private InputActions _inputs;
         [SerializeField] private CharacterController _charCntrlr;
         [SerializeField] private Animator _animator;
-        private int _speedID, _deathID, _idleXID;
+        private int _speedID, _deathID, _idleID, _walkID, _runningID; 
         [SerializeField] private Transform _cameraAimPoint;
         [SerializeField] private float _speed = 2, _cameraSensitivity = 2;
         private bool _isDead;
@@ -19,17 +20,18 @@ namespace LemApperson_3DGame.Player
             _inputs = new InputActions();
             _inputs.Player.Quit.performed += UnlockCursor;
             _animator = GetComponentInChildren<Animator>();
-            StartCoroutine(SwitchIdle());
             _charCntrlr = GetComponent<CharacterController>();
             _speedID = Animator.StringToHash("Speed");
             _deathID = Animator.StringToHash("Death");
-            _idleXID = Animator.StringToHash("IdleX");
+            _idleID = Animator.StringToHash("Idle");
+            _walkID = Animator.StringToHash("Walk");
+            _runningID = Animator.StringToHash("Running");
         }
 
         private void Update()
         {
-            _speed = _charCntrlr.velocity.magnitude;
-            _animator.SetFloat(_speedID, _speed);
+            var velocity = _charCntrlr.velocity;
+            _animator.SetFloat(_speedID, velocity.magnitude);
             CameraController();
         }       
         private void CameraController() {
@@ -68,22 +70,30 @@ namespace LemApperson_3DGame.Player
             _inputs.Disable();
         }
 
-        public IEnumerator  SwitchIdle() {
-            while (!_isDead) {
-                float randomValue = Random.Range(0, 4) * 0.33f;
-                _animator.SetFloat(_idleXID, randomValue);
-                yield return new WaitForSeconds(2.5f);
+        public void OnAnimationStateEntered(int NameHash)
+        {
+            if (NameHash == _deathID) {
+                
+            } else if (NameHash == _idleID) {
+                
+            }  else if (NameHash == _walkID) {
+                
+            }  else if (NameHash == _runningID) {
+                
             }
         }
 
-        public void OnAnimationStateEntered(float stateInfoLength)
+        public void OnAnimationStateExited(int NameHash)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void OnAnimationStateExited(int stateInfoShortNameHash)
-        {
-            throw new System.NotImplementedException();
+            if (NameHash == _deathID) {
+                
+            } else if (NameHash == _idleID) {
+                
+            }  else if (NameHash == _walkID) {
+                
+            }  else if (NameHash == _runningID) {
+                
+            } 
         }
     }
 }
